@@ -5,6 +5,8 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 
+import ChatRoom from "../models/chatroom.model.js";
+
 // ─── SEND MATCH REQUEST (Swipe Right / Swipe Left) ───────────────────────────
 const sendMatchRequest = asyncHandler(async (req, res) => {
   const { receiverId, status } = req.params;
@@ -79,8 +81,18 @@ const reviewMatchRequest = asyncHandler(async (req, res) => {
   match.status = status;
   await match.save();
 
-  // ── If accepted → create a ChatRoom (Phase 5 prep) ──────────────────────
-  // We'll add this logic in Phase 5 when ChatRoom model exists
+  if (status === "accepted") {
+  // check if chatroom already exists (safety check)
+  const existingRoom = await ChatRoom.findOne({
+    participants: { $all: [match.sender, match.receiver] },
+  });
+
+  if (!existingRoom) {
+    await ChatRoom.create({
+      participants: [match.sender, match.receiver],
+    });
+  }
+}
 
   return res
     .status(200)

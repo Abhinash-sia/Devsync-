@@ -3,7 +3,7 @@ import cors from 'cors'
 import authRoutes from "./routes/auth.routes.js";
 import profileRoutes from "./routes/profile.routes.js";
 import matchRoutes from "./routes/match.routes.js";
-
+import chatRoutes from "./routes/chat.routes.js";
 import cookieParser from "cookie-parser"
 
 
@@ -27,7 +27,7 @@ app.use(cookieParser());
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/profile", profileRoutes);
 app.use("/api/v1/match", matchRoutes);
-
+app.use("/api/v1/chat", chatRoutes);
 //Global Error Handler
 app.use ((err , req ,res , next)=>{
     const statusCode = err.statusCode || 500;
