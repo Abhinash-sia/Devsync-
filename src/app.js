@@ -1,8 +1,10 @@
 import express from "express"
 import cors from 'cors'
 import authRoutes from "./routes/auth.routes.js";
+import profileRoutes from "./routes/profile.routes.js";
 
 import cookieParser from "cookie-parser"
+
 
 const app = express();
 
@@ -22,6 +24,7 @@ app.use(cookieParser());
 //  Routes 
 
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/profile", profileRoutes);
 
 //Global Error Handler
 app.use ((err , req ,res , next)=>{
