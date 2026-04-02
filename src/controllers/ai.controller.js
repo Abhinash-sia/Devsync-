@@ -64,3 +64,4 @@ const parseResume = asyncHandler(async (req, res) => {
 
 
 export { parseResume };
+
