@@ -5,7 +5,7 @@ import profileRoutes from "./routes/profile.routes.js";
 import matchRoutes from "./routes/match.routes.js";
 import chatRoutes from "./routes/chat.routes.js";
 import cookieParser from "cookie-parser"
-
+import aiRoutes from "./routes/ai.routes.js";
 
 const app = express();
 
@@ -28,6 +28,9 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/profile", profileRoutes);
 app.use("/api/v1/match", matchRoutes);
 app.use("/api/v1/chat", chatRoutes);
+
+app.use("/api/v1/ai", aiRoutes);
+
 //Global Error Handler
 app.use ((err , req ,res , next)=>{
     const statusCode = err.statusCode || 500;
